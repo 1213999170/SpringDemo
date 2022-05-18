@@ -1,0 +1,59 @@
+---
+spring:
+  application:
+    name: omp-sample-service
+  profiles:
+    active: ${PROFILE_NAME:local}
+  cloud:
+    config:
+      # uri: http://127.0.0.1:8082
+      discovery:
+        enabled: true
+        serviceId: pdc-infrastructure-config
+
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 1800s
+      cookie:
+        secure: true
+
+eureka:
+  instance:
+    statusPageUrl: http://${eureka.hostname}:${server.port}/actuator/info
+    healthCheckUrl: http://${eureka.hostname}:${server.port}/actuator/health
+    homePageUrl: http://${eureka.hostname}:${server.port}/
+    secure-port-enabled: false
+    non-secure-port-enabled: true
+    prefer-ip-address: true
+  client:
+    fetchRegistry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://pdc-infrastructure-discovery-service:8761/eureka/
+      prefer-same-zone-eureka: true
+
+encrypt:
+  key: ${PROPS_ENCRYPTION_KEY:#{null}}
+
+# local
+---
+spring:
+  profiles: local
+  cloud:
+    config:
+      discovery:
+        enabled: false
+
+eureka:
+  instance:
+    secure-port-enabled: false
+    non-secure-port-enabled: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    fetchRegistry: false
+    register-with-eureka: false
+    server:
+      waitTimeInMsWhenSyncEmpty: 0

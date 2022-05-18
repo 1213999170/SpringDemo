@@ -1,0 +1,16 @@
+task gitExecutableHooks {
+    doLast {
+        String os = System.getProperty("os.name");
+        if(!os.toLowerCase().startsWith("win")){  
+            Runtime.getRuntime().exec("chmod -R +x .git/hooks/");
+        }
+    }
+}
+
+task installGitHooks(type: Copy) {
+    from new File("${rootProject.rootDir}/config/git/pre-commit")
+    into { new File("${rootProject.rootDir}/.git/hooks") }
+}
+
+gitExecutableHooks.dependsOn installGitHooks
+assemble.dependsOn gitExecutableHooks

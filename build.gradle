@@ -1,0 +1,118 @@
+buildscript {
+    ext {
+        repositoryUrl = "${artifactoryUrl}" + "${repository}"
+    }
+    repositories {
+        maven {
+            credentials {
+                username "$mavenUser"
+                password "$mavenPassword"
+            }
+            url 'https://gitlab.porsche-preview.cn/nexus/repository/maven-public/'
+        }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    }
+}
+
+plugins {
+    id "checkstyle"
+    id "com.github.spotbugs" version "2.0.0"
+    id "pmd"
+    id "org.sonarqube" version "3.0"
+}
+
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: "org.springframework.boot"
+apply plugin: "io.spring.dependency-management"
+apply plugin: 'jacoco'
+apply from: rootProject.file('gradle/config/jacoco-config.gradle')
+apply from: rootProject.file('gradle/config/git-hooks.gradle')
+
+description = "Digital Sales OMP Service"
+group = "cn.porsche.omp"
+version = "0.0.1-SNAPSHOT"
+sourceCompatibility = 11.0
+
+repositories {
+    maven {
+        credentials {
+            username "$mavenUser"
+            password "$mavenPassword"
+        }
+        url 'https://gitlab.porsche-preview.cn/nexus/repository/maven-public/'
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+dependencies {
+    implementation('cn.porsche.digital:mybatis-support-library:0.1')
+    implementation('cn.porsche.digital:spring-web-support-library:0.1.1')
+    implementation('cn.porsche.digital:spring-security-support-library:0.1.4')
+    compile('org.glassfish.jaxb:jaxb-runtime:2.3.0')
+
+    // Spring cloud
+    compile("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+    implementation('org.springframework.cloud:spring-cloud-starter-openfeign')
+    implementation("org.springframework.cloud:spring-cloud-starter-config")
+    
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+
+
+    implementation('mysql:mysql-connector-java:8.0.15')
+
+    // Caching
+    compile("org.springframework.boot:spring-boot-starter-cache")
+    compile("org.springframework.data:spring-data-redis")
+    compile("io.lettuce:lettuce-core:5.1.8.RELEASE")
+    implementation('org.apache.commons:commons-pool2:2.6.2')
+
+    // logging
+    implementation('org.springframework.boot:spring-boot-starter-logging')
+    compile("net.logstash.logback:logstash-logback-encoder:5.3")
+
+    // swagger
+    implementation('io.springfox:springfox-swagger2:2.9.2')
+    implementation('io.springfox:springfox-swagger-ui:2.9.2')
+
+    // test
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile('com.h2database:h2')
+    
+    // lombok annotation driven
+    compileOnly 'org.projectlombok:lombok:1.18.8'
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+}
+
+pmd {
+    toolVersion = "6.15.0"
+}
+
+tasks.withType(com.github.spotbugs.SpotBugsTask) {
+    ignoreFailures = false
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
+
+tasks.withType(org.gradle.api.plugins.quality.Pmd) {
+    ruleSetFiles = files("${projectDir}/pmd.xml")
+    ruleSets = []
+    source = fileTree("${project.projectDir}/src/main/java")
+    ignoreFailures = false
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
+
+project.tasks["sonarqube"].dependsOn "check"

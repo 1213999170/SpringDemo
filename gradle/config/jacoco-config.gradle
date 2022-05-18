@@ -1,0 +1,57 @@
+apply plugin: 'jacoco'
+
+def generalExcludes = [
+    
+]
+
+def coverageExcludes = [
+
+]
+
+test {
+    jacoco {
+        destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.2"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+    afterEvaluate {
+        classDirectories = files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: generalExcludes)
+        })
+    }
+}
+
+jacocoTestCoverageVerification {
+    afterEvaluate {
+        classDirectories = files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: generalExcludes + coverageExcludes)
+        })
+    }
+
+    violationRules {
+        rule {
+            limit {
+                counter = "LINE"
+                value = 'COVEREDRATIO'
+                minimum = 0.00
+            }
+            limit {
+                counter = "BRANCH"
+                value = 'COVEREDRATIO'
+                minimum = 0.00
+            }
+        }
+    }
+}
+
+jacocoTestCoverageVerification.dependsOn jacocoTestReport
+check.dependsOn jacocoTestCoverageVerification

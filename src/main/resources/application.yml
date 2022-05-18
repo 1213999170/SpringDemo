@@ -1,0 +1,41 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info,health,env,scheduledtasks
+  info:
+    git:
+      mode: full
+
+mybatis-plus:
+  mapper-locations: classpath:/mybatis/*.xml
+  type-enums-package: cn.porsche.*.*.enums
+  default-enum-type-handler: com.baomidou.mybatisplus.extension.handlers.MybatisEnumTypeHandler
+  global-config:
+    db-config:
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: BASIC
+        connectTimeout: 60000
+        readTimeout: 60000
+  hystrix:
+    enabled: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000

@@ -1,0 +1,31 @@
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 1800s
+      cookie:
+        secure: true
+    context-path: /
+
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:dbtest;MODE=MYSQL;INIT=CREATE SCHEMA IF NOT EXISTS dbtest
+    username: sa
+    password:
+
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: always
+
+swagger:
+  enable: true
+
+mybatis-plus:
+  mapper-locations: classpath:/mybatis/*.xml
+  type-enums-package: cn.porsche.*.*.enums
+  global-config:
+    db-config:
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
