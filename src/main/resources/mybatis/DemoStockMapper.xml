@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.porsche.demo.stock.mapper.DemoStockMapper">
+
+  <insert id="insertBatch" parameterType="java.util.List">
+    INSERT INTO demo_stock
+    (dealer_code, order_id,
+    saaa, sbbb, sccc, sddd, seee, sfff, sggg, shhh, siii, sjjj, skkk, slll, smmm, snnn, sooo,
+    sppp, sqqq, srrr, ssss, sttt)
+    VALUES
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.dealerCode}, #{item.orderId},
+      #{item.saaa}, #{item.sbbb}, #{item.sccc}, #{item.sddd}, #{item.seee}, #{item.sfff}, #{item.sggg},
+      #{item.shhh}, #{item.siii}, #{item.sjjj}, #{item.skkk}, #{item.slll}, #{item.smmm}, #{item.snnn},
+      #{item.sooo}, #{item.sppp}, #{item.sqqq}, #{item.srrr}, #{item.ssss}, #{item.sttt})
+    </foreach>
+  </insert>
+</mapper>

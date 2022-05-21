@@ -1,0 +1,31 @@
+DROP TABLE IF EXISTS demo_order;
+
+CREATE TABLE `demo_order` (
+    `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `dealer_code` INT(10) NOT NULL COMMENT 'dealer_code',
+    `aaa` VARCHAR(10) COMMENT 'aaa',
+    `bbb` VARCHAR(10) COMMENT 'bbb',
+    `ccc` VARCHAR(10) COMMENT 'ccc',
+    `ddd` VARCHAR(10) COMMENT 'ddd',
+    `eee` VARCHAR(10) COMMENT 'eee',
+    `fff` VARCHAR(10) COMMENT 'fff',
+    `ggg` VARCHAR(10) COMMENT 'ggg',
+    `hhh` VARCHAR(10) COMMENT 'hhh',
+    `iii` VARCHAR(10) COMMENT 'iii',
+    `jjj` VARCHAR(10) COMMENT 'jjj',
+    `kkk` VARCHAR(10) COMMENT 'kkk',
+    `lll` VARCHAR(10) COMMENT 'lll',
+    `mmm` VARCHAR(10) COMMENT 'mmm',
+    `nnn` VARCHAR(10) COMMENT 'nnn',
+    `ooo` VARCHAR(10) COMMENT 'ooo',
+    `ppp` VARCHAR(10) COMMENT 'ppp',
+    `qqq` VARCHAR(10) COMMENT 'qqq',
+    `rrr` VARCHAR(10) COMMENT 'rrr',
+    `sss` VARCHAR(10) COMMENT 'sss',
+    `ttt` VARCHAR(10) COMMENT 'ttt',
+    `create_by` VARCHAR(50) COMMENT '创建人',
+    `create_time` DATETIME COMMENT '创建时间',
+    `update_by` VARCHAR(50) COMMENT '更新人',
+    `update_time` DATETIME COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='demo_order';

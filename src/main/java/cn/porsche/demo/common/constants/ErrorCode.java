@@ -1,4 +1,4 @@
-package cn.porsche.omp.common.constants;
+package cn.porsche.demo.common.constants;
 
 import cn.porsche.digital.common.constants.CommonErrorCode;
 

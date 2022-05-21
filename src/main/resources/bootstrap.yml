@@ -1,7 +1,7 @@
 ---
 spring:
   application:
-    name: omp-sample-service
+    name: spring-demo-service
   profiles:
     active: ${PROFILE_NAME:local}
   cloud:

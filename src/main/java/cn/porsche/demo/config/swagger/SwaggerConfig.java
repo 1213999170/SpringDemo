@@ -1,4 +1,4 @@
-package cn.porsche.omp.config.swagger;
+package cn.porsche.demo.config.swagger;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -10,7 +10,6 @@ import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiKey;
-import springfox.documentation.service.AuthorizationScope;
 import springfox.documentation.service.Contact;
 import springfox.documentation.service.SecurityReference;
 import springfox.documentation.spi.DocumentationType;
@@ -27,13 +26,13 @@ public class SwaggerConfig {
   public Docket controllerApi() {
     return new Docket(DocumentationType.SWAGGER_2)
         .apiInfo(new ApiInfoBuilder()
-            .title("APIs for Porsche OMP Sample Service")
+            .title("APIs for Porsche Spring Demo Sample Service")
             .description("Description: ...")
             .contact(new Contact("", "", ""))
             .version("0.0.1")
             .build())
         .select()
-        .apis(RequestHandlerSelectors.basePackage("cn.porsche.omp"))
+        .apis(RequestHandlerSelectors.basePackage("cn.porsche.demo"))
         .paths(PathSelectors.any())
         .build()
         .securitySchemes(securitySchemes())
@@ -42,8 +41,8 @@ public class SwaggerConfig {
 
   private List<ApiKey> securitySchemes() {
     return newArrayList(
-        new ApiKey("Authorization", "Authorization", "header"),
-        new ApiKey("X-JWT-TOKEN", "X-JWT-TOKEN", "header")
+//        new ApiKey("Authorization", "Authorization", "header"),
+//        new ApiKey("X-JWT-TOKEN", "X-JWT-TOKEN", "header")
     );
   }
 
@@ -57,9 +56,10 @@ public class SwaggerConfig {
   }
 
   List<SecurityReference> defaultAuth() {
-    AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+    // AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
     return newArrayList(
-        new SecurityReference("Authorization", new AuthorizationScope[]{authorizationScope}),
-        new SecurityReference("X-JWT-TOKEN", new AuthorizationScope[]{authorizationScope}));
+//        new SecurityReference("Authorization", new AuthorizationScope[]{authorizationScope}),
+//        new SecurityReference("X-JWT-TOKEN", new AuthorizationScope[]{authorizationScope})
+    );
   }
 }

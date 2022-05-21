@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://${JDBC_HOST:localhost}:3306/porsche_omp_sample?useSSL=false&useTimezone=true&serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
-    username: ${JDBC_USER:root}
-    password: ${JDBC_PASS:123456}
+    url: jdbc:mysql://127.0.0.1:3306/demo_first?useSSL=false&useTimezone=true&serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 777777
     hikari:
       connection-timeout: 20000
       minimum-idle: 10
@@ -27,6 +27,9 @@ spring:
 
 swagger:
   enable: true
+
+server:
+  port: 8099
 
 shareService:
   userCenter:

@@ -15,8 +15,8 @@
                 <pattern>
                     <pattern>
                         {
-                        "tags": ["omp-sample-service"],
-                        "project": "omp-sample-service",
+                        "tags": ["spring-demo-service"],
+                        "project": "spring-demo-service",
                         "timestamp": "%date{\"yyyy-MM-dd'T'HH:mm:ss,SSSZ\"}",
                         "log_level": "%level",
                         "thread": "%thread",
@@ -37,7 +37,7 @@
         <root level="INFO">
             <appender-ref ref="STDOUT"/>
         </root>
-        <logger additivity="false" level="DEBUG" name="cn.porsche.omp">
+        <logger additivity="false" level="DEBUG" name="cn.porsche.demo">
             <appender-ref ref="STDOUT"/>
         </logger>
         <logger additivity="false" level="DEBUG" name="org.springframework.web.filter.CommonsRequestLoggingFilter">
@@ -49,7 +49,7 @@
         <root level="INFO">
             <appender-ref ref="ELK" />
         </root>
-        <logger additivity="false" level="DEBUG" name="cn.porsche.omp">
+        <logger additivity="false" level="DEBUG" name="cn.porsche.demo">
             <appender-ref ref="ELK" />
         </logger>
         <logger additivity="false" level="DEBUG" name="org.springframework.web.filter.CommonsRequestLoggingFilter">

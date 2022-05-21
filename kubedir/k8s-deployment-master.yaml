@@ -2,13 +2,13 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    run: omp-sample-service
-  name: omp-sample-service
+    run: spring-demo-service
+  name: spring-demo-service
 spec:
   replicas: 3
   selector:
     matchLabels:
-      run: omp-sample-service
+      run: spring-demo-service
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -16,11 +16,11 @@ spec:
   template:
     metadata:
       labels:
-        run: omp-sample-service
+        run: spring-demo-service
     spec:
       containers:
-      - image: 150620102644.dkr.ecr.cn-north-1.amazonaws.com.cn/omp-sample-service:0.01
-        name: omp-sample-service
+      - image: 150620102644.dkr.ecr.cn-north-1.amazonaws.com.cn/spring-demo-service:0.01
+        name: spring-demo-service
         ports:
         - containerPort: 8080
           name: userport
@@ -46,7 +46,7 @@ spec:
               name: secret-prod-git
               key: PROPS_ENCRYPTION_KEY
         - name: NEW_RELIC_APP_NAME
-          value: "omp-sample-service-prod"
+          value: "spring-demo-service-prod"
         - name: NEW_RELIC_LICENSE_KEY
           valueFrom:
             secretKeyRef:

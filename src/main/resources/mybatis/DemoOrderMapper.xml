@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.porsche.demo.order.mapper.DemoOrderMapper">
+
+  <insert id="insertBatch" parameterType="java.util.List">
+    INSERT INTO demo_order
+    (dealer_code, aaa, bbb, ccc, ddd, eee, fff, ggg, hhh, iii, jjj, kkk, lll, mmm, nnn, ooo, ppp, qqq, rrr, sss, ttt)
+    VALUES
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.dealerCode},
+      #{item.aaa}, #{item.bbb}, #{item.ccc}, #{item.ddd}, #{item.eee}, #{item.fff}, #{item.ggg},
+      #{item.hhh}, #{item.iii}, #{item.jjj}, #{item.kkk}, #{item.lll}, #{item.mmm}, #{item.nnn},
+      #{item.ooo}, #{item.ppp}, #{item.qqq}, #{item.rrr}, #{item.sss}, #{item.ttt})
+    </foreach>
+  </insert>
+
+  <select id="getByLimit" resultType="cn.porsche.demo.order.entity.DemoOrderEntity">
+    select * from demo_order limit #{begin}, #{size}
+  </select>
+
+  <select id="getOrderStockList" resultType="cn.porsche.demo.order.entity.DemoOrderStockEntity">
+    select * from demo_order_stock_join_view
+  </select>
+
+  <select id="getOrderStockListByDealerCode" resultType="cn.porsche.demo.order.entity.DemoOrderStockEntity">
+    select * from demo_order_stock_join_view where dealer_code = #{dealerCode}
+  </select>
+
+</mapper>

@@ -1,0 +1,33 @@
+DROP TABLE IF EXISTS demo_stock;
+
+CREATE TABLE `demo_stock` (
+    `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `dealer_code` INT(10) NOT NULL COMMENT 'dealer_code',
+    `order_id` INT(10) COMMENT 'order_id',
+    `saaa` VARCHAR(10) COMMENT 'saaa',
+    `sbbb` VARCHAR(10) COMMENT 'sbbb',
+    `sccc` VARCHAR(10) COMMENT 'sccc',
+    `sddd` VARCHAR(10) COMMENT 'sddd',
+    `seee` VARCHAR(10) COMMENT 'seee',
+    `sfff` VARCHAR(10) COMMENT 'sfff',
+    `sggg` VARCHAR(10) COMMENT 'sggg',
+    `shhh` VARCHAR(10) COMMENT 'shhh',
+    `siii` VARCHAR(10) COMMENT 'siii',
+    `sjjj` VARCHAR(10) COMMENT 'sjjj',
+    `skkk` VARCHAR(10) COMMENT 'skkk',
+    `slll` VARCHAR(10) COMMENT 'slll',
+    `smmm` VARCHAR(10) COMMENT 'smmm',
+    `snnn` VARCHAR(10) COMMENT 'snnn',
+    `sooo` VARCHAR(10) COMMENT 'sooo',
+    `sppp` VARCHAR(10) COMMENT 'sppp',
+    `sqqq` VARCHAR(10) COMMENT 'sqqq',
+    `srrr` VARCHAR(10) COMMENT 'srrr',
+    `ssss` VARCHAR(10) COMMENT 'ssss',
+    `sttt` VARCHAR(10) COMMENT 'sttt',
+    `create_by` VARCHAR(50) COMMENT '创建人',
+    `create_time` DATETIME COMMENT '创建时间',
+    `update_by` VARCHAR(50) COMMENT '更新人',
+    `update_time` DATETIME COMMENT '更新时间',
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX `order_id` (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='demo_stock';
